@@ -1,10 +1,9 @@
+const axios = require("axios");
 const {Coin} = require("../models")
 
 const updateDB = async () => {
-    const url = "https://api.coingecko.com/api/v3/coins/list"
     try {
-        let coins = await fetch(url, {method: "GET"});
-        coins = await response.json();
+        const coins = await axios.get("https://api.coingecko.com/api/v3/coins/list");
         for (const coin of coins){
             await Coin.updateOne({id:coin.id},coin,{upsert: true});
         }
