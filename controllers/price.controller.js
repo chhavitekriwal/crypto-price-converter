@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Coin = require("../models/Coin");
+const Coin = require("../models/coin.model");
 
 const getPrice = async (req,res) => {
     const {fromCurrency,toCurrency,date} = req.query;
@@ -11,12 +11,12 @@ const getPrice = async (req,res) => {
         ])
 
         if(!fromCurrencyData || !toCurrencyData) {
-            res.status(400).json({error: "One or more currencies missing"});
+            return res.status(400).json({error: "One or more currencies missing"});
         }
 
-        const fromData = await axios.get(`api.coingecko.com/api/v3/coins/${fromCurrency}/history?date=${date}&localization=false`); 
+        const fromData = await axios.get(`https://api.coingecko.com/api/v3/coins/${fromCurrency}/history?date=${date}&localization=false`); 
         if(!fromData.data.market_data) {
-            res.status(404).json({error: `Price not found for ${fromCurrency} on ${date}`});
+            return res.status(404).json({error: `Price not found for ${fromCurrency} on ${date}`});
         }
         const fromPrices = fromData.data.market_data.current_price;
         const toCurrencySymbol = toCurrencyData.symbol;
@@ -25,9 +25,9 @@ const getPrice = async (req,res) => {
             toCurrencyPrice = fromPrices[toCurrencySymbol];
         } else {
             fromToBtc = fromPrices.btc;
-            const toData = await axios.get(`api.coingecko.com/api/v3/coins/${fromCurrency}/history?date=${date}&localization=false`);
+            const toData = await axios.get(`https://api.coingecko.com/api/v3/coins/${toCurrency}/history?date=${date}&localization=false`);
             if (!toData.data.market_data) {
-                res.status(404).json({ error: `Price conversion not supported for these currencies`});
+                return res.status(422).json({ error: `Cannot determine the price of ${fromCurrency} in terms of ${toCurrency} on ${date}`});
             }            
             toToBtc = await toData.data.market_data.current_price.btc;
             toCurrencyPrice = fromToBtc/toToBtc;

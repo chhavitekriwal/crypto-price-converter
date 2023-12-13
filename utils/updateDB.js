@@ -1,5 +1,5 @@
 const axios = require("axios");
-const {Coin} = require("../models")
+const {Coin} = require("../models/coin.model")
 
 const updateDB = async () => {
     try {
