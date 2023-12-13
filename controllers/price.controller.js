@@ -1,5 +1,6 @@
 const axios = require("axios");
 const Coin = require("../models/coin.model");
+const ApiError = require("../utils/ApiError");
 
 const getPrice = async (req,res) => {
     const {fromCurrency,toCurrency,date} = req.query;
@@ -10,13 +11,12 @@ const getPrice = async (req,res) => {
             Coin.findOne({id:toCurrency})
         ])
 
-        if(!fromCurrencyData || !toCurrencyData) {
-            return res.status(400).json({error: "One or more currencies missing"});
-        }
+        if(!fromCurrencyData) throw new ApiError(400, "Invalid currency ID", `There is no currency with an id of ${fromCurrency}.`);
+        if(!toCurrencyData) throw new ApiError(400, "Invalid currency ID", `There is no currency with an id of ${toCurrency}.`);
 
         const fromData = await axios.get(`https://api.coingecko.com/api/v3/coins/${fromCurrency}/history?date=${date}&localization=false`); 
         if(!fromData.data.market_data) {
-            return res.status(404).json({error: `Price not found for ${fromCurrency} on ${date}`});
+            throw new ApiError(404, "Price not found", `No price data is available for ${fromCurrency} on ${date}.`);
         }
         const fromPrices = fromData.data.market_data.current_price;
         const toCurrencySymbol = toCurrencyData.symbol;
@@ -27,7 +27,7 @@ const getPrice = async (req,res) => {
             fromToBtc = fromPrices.btc;
             const toData = await axios.get(`https://api.coingecko.com/api/v3/coins/${toCurrency}/history?date=${date}&localization=false`);
             if (!toData.data.market_data) {
-                return res.status(422).json({ error: `Cannot determine the price of ${fromCurrency} in terms of ${toCurrency} on ${date}`});
+                throw new ApiError(422, "Cannot be processed", `Direct conversion from ${fromCurrency} to ${toCurrency} is not possible. Indirect conversion is also not possible due to absence of price data for ${toCurrency} on ${data}.`);
             }            
             toToBtc = await toData.data.market_data.current_price.btc;
             toCurrencyPrice = fromToBtc/toToBtc;
@@ -39,8 +39,12 @@ const getPrice = async (req,res) => {
             toCurrency,
             price: toCurrencyPrice
         });
-    } catch (err) {
-        res.status(500).json({error: 'Internal server error'});
+    } catch (error) {
+        if(error instanceof ApiError) {
+            res.status(error.code).json({error:error.message, reason: error.reason})
+        } else {
+            res.status(500).json({error: "Internal server error"})
+        }
     }
 }
 
