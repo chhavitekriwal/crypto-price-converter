@@ -4,7 +4,7 @@ const routes = require("./routes/price.route");
 const updateDB = require("./utils/updateDB");
 const app = express();
 
-app.use("/",routes);
+app.use("/api/crypto",routes);
 
 cron.schedule("0 * * * *", updateDB);
 
