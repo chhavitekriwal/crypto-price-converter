@@ -1,6 +1,7 @@
 const JoiBase = require('joi');
 const JoiDate = require('@hapi/joi-date');
 const Joi = JoiBase.extend(JoiDate);
+const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 
 const validate = (req, res, next) => {
