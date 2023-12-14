@@ -1,5 +1,5 @@
 const axios = require("axios");
-const {Coin} = require("../models/coin.model")
+const Coin = require("../models/coin.model")
 
 const updateDB = async () => {
     try {
@@ -10,6 +10,7 @@ const updateDB = async () => {
         console.log("Database Updated");
     } catch (error) {
         console.error("Error updating database");
+        console.error(error)
     }
 }
 module.exports = updateDB
