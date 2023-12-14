@@ -18,7 +18,7 @@ const updateDB = async () => {
       await Coin.insertMany(coinsToAdd);
     }
     if (coinsToDelete.length > 0) {
-      const result = await Coin.deleteMany({id : {$in: coinsToDelete}});
+      await Coin.deleteMany({id : {$in: coinsToDelete}});
     }
     const coins = await Coin.countDocuments();
     logger.info(`Database Updated. ${coins} records.`);
