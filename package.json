@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development node index.js"
+  },
   "dependencies": {
     "@hapi/joi-date": "^2.0.1",
     "axios": "^1.6.2",
