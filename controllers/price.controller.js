@@ -38,7 +38,7 @@ const getPrice = async (req, res) => {
         throw new ApiError(
           422,
           'Cannot be processed',
-          `Direct conversion from ${fromCurrency} to ${toCurrency} is not possible. Indirect conversion is also not possible due to absence of price data for ${toCurrency} on ${data}.`
+          `Direct conversion from ${fromCurrency} to ${toCurrency} is not possible. Indirect conversion is also not possible due to absence of price data for ${toCurrency} on ${date}.`
         );
       }
       toToBtc = await toData.data.market_data.current_price.btc;
@@ -55,9 +55,9 @@ const getPrice = async (req, res) => {
     if (error instanceof ApiError) {
       res.status(error.code).json({error: error.message, reason: error.reason});
     } else {
+      logger.error(error);
       res.status(500).json({error: 'Internal server error'});
     }
-    logger.error(error);
   }
 };
 
