@@ -1,6 +1,7 @@
 const JoiBase = require('joi');
 const JoiDate = require('@hapi/joi-date');
 const Joi = JoiBase.extend(JoiDate);
+const ApiError = require('../utils/ApiError');
 
 const validate = (req, res, next) => {
   const schema = Joi.object({
@@ -12,10 +13,11 @@ const validate = (req, res, next) => {
   const {error} = schema.validate(req.query);
 
   if (error) {
-    return res.status(400).json({error: error.details[0].message});
+    const errorMessage = error.details.map(details => details.message).join(", ");
+    return next(new ApiError(httpStatus.BAD_REQUEST, errorMessage));
   }
 
-  next();
+  return next();
 };
 
 module.exports = validate;
