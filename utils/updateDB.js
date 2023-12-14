@@ -9,8 +9,8 @@ const updateDB = async () => {
         }
         console.log("Database Updated");
     } catch (error) {
-        console.error("Error updating database");
-        console.error(error)
+        logger.error("Error updating database");
+        logger.error(error) 
     }
 }
 module.exports = updateDB

@@ -2,6 +2,8 @@ const axios = require("axios");
 const Coin = require("../models/coin.model");
 const ApiError = require("../utils/ApiError");
 
+const logger = require("../utils/winston");
+
 const getPrice = async (req,res) => {
     const {fromCurrency,toCurrency,date} = req.query;
 
@@ -45,6 +47,7 @@ const getPrice = async (req,res) => {
         } else {
             res.status(500).json({error: "Internal server error"})
         }
+        logger.error(error);
     }
 }
 
