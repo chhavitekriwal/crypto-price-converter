@@ -14,6 +14,10 @@ Install dependencies and start the server
   yarn install
   yarn start
 ```
+The server runs in production mode by default. To run in development mode:
+```
+  yarn dev
+```
 
 ### API Reference
 
