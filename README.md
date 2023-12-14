@@ -1,5 +1,5 @@
 ## Cryptocurrency Converter
-A wrapper around Coingecko API to convert cryptocurrencies = part of an internship assignment.
+A wrapper around Coingecko API to convert cryptocurrencies as part of an internship assignment.
 
 ### Run Locally
 
