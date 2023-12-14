@@ -7,12 +7,26 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
   integrity sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==
 
+"@hapi/joi-date@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@hapi/joi-date/-/joi-date-2.0.1.tgz#9d63bcc320fa64d9bb7a9b7f6ee3c1831019cbbb"
+  integrity sha512-8be8JUEC8Wm1Do3ryJy+TXmkAL13b2JwXn7gILBoor8LopY/M+hJskodzOOxfJdckkfWnbmbnMEyJW3d/gZMfA==
+  dependencies:
+    moment "2.x.x"
+
 "@hapi/topo@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-5.1.0.tgz#dc448e332c6c6e37a4dc02fd84ba8d44b9afb012"
   integrity sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==
   dependencies:
     "@hapi/hoek" "^9.0.0"
+
+"@joi/date@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@joi/date/-/date-2.1.0.tgz#fa7e3069a63c17d9ebe51a0b667f090c288de237"
+  integrity sha512-2zN5m0LgxZp/cynHGbzEImVmFIa+n+IOb/Nlw5LX/PLJneeCwG1NbiGw7MvPjsAKUGQK8z31Nn6V6lEN+4fZhg==
+  dependencies:
+    moment "2.x.x"
 
 "@mongodb-js/saslprep@^1.1.0":
   version "1.1.1"
@@ -414,6 +428,11 @@ mime@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
+
+moment@2.x.x:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 mongodb-connection-string-url@^2.6.0:
   version "2.6.0"

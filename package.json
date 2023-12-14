@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@hapi/joi-date": "^2.0.1",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
