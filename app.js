@@ -9,6 +9,7 @@ const { errorConverter,errorHandler } = require('./middleware/error');
 
 app.use(cors());
 app.options('*', cors());
+
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
