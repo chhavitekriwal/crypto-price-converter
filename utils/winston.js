@@ -1,23 +1,23 @@
-const winston = require("winston");
+const winston = require('winston');
 
-const enumerateErrorFormat = winston.format((info) => {
+const enumerateErrorFormat = winston.format(info => {
   if (info instanceof Error) {
-    Object.assign(info, { message: info.stack });
+    Object.assign(info, {message: info.stack});
   }
   return info;
 });
 
 const logger = winston.createLogger({
-  level: process.env.MODE === "development" ? "debug" : "info",
+  level: process.env.MODE === 'development' ? 'debug' : 'info',
   format: winston.format.combine(
     enumerateErrorFormat(),
-    process.env.MODE === "development" ? winston.format.colorize()  : winston.format.uncolorize(),
+    process.env.MODE === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
     winston.format.splat(),
-    winston.format.printf(({ level, message }) => `${level}: ${message}`)
+    winston.format.printf(({level, message}) => `${level}: ${message}`)
   ),
   transports: [
     new winston.transports.Console({
-      stderrLevels: ["error"],
+      stderrLevels: ['error'],
     }),
   ],
 });

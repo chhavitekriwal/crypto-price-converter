@@ -1,16 +1,16 @@
-const axios = require("axios");
-const Coin = require("../models/coin.model")
+const axios = require('axios');
+const Coin = require('../models/coin.model');
 
 const updateDB = async () => {
-    try {
-        const coins = (await axios.get("https://api.coingecko.com/api/v3/coins/list")).data;
-        for (const coin of coins){
-            await Coin.updateOne({id:coin.id},coin,{upsert: true});
-        }
-        console.log("Database Updated");
-    } catch (error) {
-        logger.error("Error updating database");
-        logger.error(error) 
+  try {
+    const coins = (await axios.get('https://api.coingecko.com/api/v3/coins/list')).data;
+    for (const coin of coins) {
+      await Coin.updateOne({id: coin.id}, coin, {upsert: true});
     }
-}
-module.exports = updateDB
+    console.log('Database Updated');
+  } catch (error) {
+    logger.error('Error updating database');
+    logger.error(error);
+  }
+};
+module.exports = updateDB;
