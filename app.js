@@ -13,6 +13,10 @@ app.options('*', cors());
 app.use(morgan.successHandler);
 app.use(morgan.errorHandler);
 
+app.get("/",(req,res)=>{
+  res.status(200).json({CTS: "Up and Running"});
+})
+
 app.use('/api/crypto', routes);
 
 app.use(errorConverter);
