@@ -1,7 +1,7 @@
-## Cryptocurrency Converter
+# Cryptocurrency Converter
 A wrapper around Coingecko API to convert cryptocurrencies as part of an internship assignment.
 
-### Run Locally
+## Run Locally
 
 Clone the project
 
@@ -19,18 +19,46 @@ The server runs in production mode by default. To run in development mode:
   yarn dev
 ```
 
-### API Reference
 
-```http
+## API Reference
+
+Postman Documentation [here](https://documenter.getpostman.com/view/20079745/2s9Ykkfi1n)
+
+
+Base URL for local: http://127.0.0.1:8080
+
+Production URL: https://crypto.chhavitekriwal.me
+
+```shell
   GET /api/crypto/price
 ```
-Query Params
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `fromCurrency` | `string` | **Required**. Coingecko ID of the currency whose price is to be found |
-|`toCurrency` | `string` | **Required**. Coingecko ID of the currency to be converted into|
-|`date`|`DD-MM-YYYY` string | **Required**. The date on which the price is to be found|
 
-Sample request and response [here](https://documenter.getpostman.com/view/20079745/2s9Ykkfi1n)
+<details>
+<summary>Request Parameters</summary>
+<pre>
+{
+    "fromCurrency":"bitcoin",
+    "toCurrency":"ethereum",
+    "date":"14-12-2023"
+}
+</pre>
+</details>
 
-The backend is deployed at [https://crypto.chhavitekriwal.me](https://crypto.chhavitekriwal.me)
+<details>
+<summary>Response</summary>
+<pre>
+{
+    "fromCurrency": {
+        "id": "bitcoin",
+        "name": "Bitcoin"
+    },
+    "toCurrency": {
+        "id": "ethereum",
+        "name": "Ethereum"
+    },
+    "price": 18.98901266895501,
+    "date": "14-12-2023"
+}
+</pre>
+</details>
+
